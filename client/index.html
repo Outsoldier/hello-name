@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Off-the-Grid P2P Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #222;
+    }
+    header {
+      background: #0f766e;
+      color: #fff;
+      padding: 16px;
+    }
+    main {
+      padding: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    label {
+      font-weight: 600;
+    }
+    input[type="text"], textarea {
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      background: #0f766e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    button.secondary {
+      background: #4b5563;
+    }
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    #chat-log {
+      height: 320px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 8px;
+      overflow-y: auto;
+      background: #f9fafb;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+    .status {
+      margin-top: 8px;
+      color: #111827;
+      font-weight: 600;
+    }
+    .message-input {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .message-input textarea {
+      flex: 1;
+      min-height: 60px;
+      resize: vertical;
+    }
+    .bubble {
+      padding: 8px 10px;
+      margin: 4px 0;
+      border-radius: 6px;
+      max-width: 80%;
+    }
+    .bubble.me {
+      background: #d1fae5;
+      margin-left: auto;
+    }
+    .bubble.them {
+      background: #e5e7eb;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Off-the-Grid P2P Chat</h1>
+    <p>Direct, encrypted messaging via WebRTC</p>
+  </header>
+  <main>
+    <section>
+      <div class="row">
+        <div style="flex: 1 1 260px;">
+          <label for="session-code">Session code</label>
+          <input type="text" id="session-code" maxlength="8" placeholder="e.g. ABC123" />
+        </div>
+        <div class="row" style="flex: 1 1 220px;">
+          <button id="create-btn">Create session</button>
+          <button id="join-btn" class="secondary">Join session</button>
+        </div>
+      </div>
+      <p class="status" id="status">Disconnected</p>
+      <p>Share your session code with your peer. One person creates; the other joins with the same code.</p>
+    </section>
+
+    <section>
+      <div id="chat-log" aria-live="polite"></div>
+      <div class="message-input" style="margin-top: 10px;">
+        <textarea id="message" placeholder="Type an encrypted message" disabled></textarea>
+        <button id="send-btn" disabled>Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
